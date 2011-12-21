@@ -11,9 +11,9 @@ elgg_register_event_handler('init', 'system', 'etherpad_init');
 function etherpad_init() {
 	
 	// override pages library
-	elgg_register_library('elgg:pages', elgg_get_plugins_path() . 'etherpad/lib/pages.php');
+	elgg_register_library('elgg:pages', elgg_get_plugins_path() . 'elggpad/lib/pages.php');
 	
-	$actions_base = elgg_get_plugins_path() . 'etherpad/actions/etherpad';
+	$actions_base = elgg_get_plugins_path() . 'elggpad/actions/etherpad';
 	elgg_register_action("etherpad/save", "$actions_base/save.php");
 	elgg_register_action("etherpad/delete", "$actions_base/delete.php");
 	
@@ -52,7 +52,7 @@ function etherpad_init() {
 		
 		// add to groups
 		add_group_tool_option('etherpad', elgg_echo('groups:enablepads'), true);
-		elgg_extend_view('groups/tool_latest', 'etherpad/group_module');
+		elgg_extend_view('groups/tool_latest', 'elggpad/group_module');
 		
 		// Register a URL handler for bookmarks
 		elgg_register_entity_url_handler('object', 'etherpad', 'etherpad_url');
@@ -81,7 +81,7 @@ function etherpad_page_handler($page, $handler) {
 
 	elgg_push_breadcrumb(elgg_echo($handler), "$handler/all");
 
-	$base_dir = elgg_get_plugins_path() . "etherpad/pages/$handler";
+	$base_dir = elgg_get_plugins_path() . "elggpad/pages/$handler";
 
 	$page_type = $page[0];
 	switch ($page_type) {
@@ -193,7 +193,7 @@ function etherpad_notify_message($hook, $entity_type, $returnvalue, $params) {
  */
 function etherpad_url($entity) {
 	$title = elgg_get_friendly_title($entity->title);
-	return "etherpad/view/$entity->guid/$title";
+	return "elggpad/view/$entity->guid/$title";
 }
 
 /**
@@ -207,10 +207,10 @@ function etherpad_icon_url_override($hook, $type, $returnvalue, $params) {
 		elgg_instanceof($entity, 'object', 'subpad')) {
 		switch ($params['size']) {
 			case 'small':
-				return 'mod/etherpad/images/etherpad.png';
+				return 'mod/elggpad/images/etherpad.png';
 				break;
 			case 'medium':
-				return 'mod/etherpad/images/etherpad_lrg.png';
+				return 'mod/elggpad/images/etherpad_lrg.png';
 				break;
 		}
 	}
